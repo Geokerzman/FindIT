@@ -10,7 +10,6 @@
   // URL Root
   define('URLROOT', 'http://localhost/shareposts');
   // Site Name
-  define('SITENAME', 'FindIT');
+  define('SITENAME', 'SharePosts');
   // App Version
   define('APPVERSION', '1.0.0');
-
