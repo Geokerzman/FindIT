@@ -1,0 +1,318 @@
+:root{
+    --submit:#9b67ff;
+    --submit-hover: #671ef8;
+    --nav-link: #7c52e8;
+    --inp-focus: #6f6afd;
+    --secondary-color:#e91e63;
+    --secondary-hover:#a61445;
+    --txt-bg:rgba(51,50,50,.6);
+    --bx-shd:#403759;
+    --footer-bg:#24262b;
+    --cards-shadow:2px 2px 10px 2px;
+}
+@charset "utf-8";
+/***
+    The new CSS reset - version 1.8.5 (last updated 14.6.2023)
+
+***/
+
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+    - The "html" attribute is exclud, because otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36)
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+    all: unset;
+    display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a, button {
+    cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol, ul, menu {
+    list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+    max-inline-size: 100%;
+    max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+    border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input, textarea {
+    -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+    white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+    -webkit-appearance: revert;
+    appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+:where(pre) {
+    all: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+    color: unset;
+}
+
+/* remove default dot (•) sign */
+::marker {
+    content: initial;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+    display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element */
+:where([contenteditable]:not([contenteditable="false"])) {
+    -moz-user-modify: read-write;
+    -webkit-user-modify: read-write;
+    overflow-wrap: break-word;
+    -webkit-line-break: after-white-space;
+    -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable="true"]) {
+    -webkit-user-drag: element;
+}
+
+/* Revert Modal native behavior */
+:where(dialog:modal) {
+    all: revert;
+}
+
+
+
+body{
+    overflow-x:hidden ;
+    line-height: 1.5;
+    font-family: 'Poppins', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    background-image:url(https://cdn.dribbble.com/userupload/9934940/file/original-46b54f9e5906c541d62676118748fbfd.jpg?resize=1504x1128);
+
+    background-size: cover;
+    background-repeat:no-repeat ;
+    background-attachment: fixed;
+
+}
+
+.main-header{
+    color: aliceblue;
+}
+
+
+
+.btn-success{
+    background-color: var(--submit);
+    transition: all 0.2s ease-in-out;
+    border: none;
+}
+
+.btn-success:hover{
+    background-color: var(--submit-hover);
+    transform: scale(0.95);
+    cursor: pointer;
+}
+
+.btn-dark{
+    font-weight: bold;
+    color: #c9c9c9;
+}
+
+.card{
+    box-shadow:var(--cards-shadow) var(--bx-shd);
+}
+.card-body{
+    color: aliceblue;
+    background-color: var(--txt-bg);
+    backdrop-filter: blur(40px);
+    border-radius:7px;
+}
+.upper-bar {
+    display: flex;
+    justify-content: end;
+    gap: .5rem;
+    padding: 1rem
+}
+
+/*Footer styles*/
+.container{
+    /*Quick fix , had to do it so the footer doesn't crash*/
+    min-height: calc(100% - 443px);
+    max-width: 1170px;
+    margin:auto;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+ul{
+    list-style: none;
+}
+.footer{
+
+    width: 100%;
+    bottom: 0;
+    background-color: var(--footer-bg);
+    padding: 70px 0;
+}
+.footer-col{
+    width: 25%;
+    padding: 0 15px;
+}
+.footer-col h4{
+    font-size: 18px;
+    color: #bbbbbb;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+.footer-col h4::before{
+    content: '';
+    position: absolute;
+    left:0;
+    bottom: -10px;
+    background-color: var(--secondary-color);
+    height: 2px;
+    box-sizing: border-box;
+    width:50px;
+}
+.footer-col ul li:not(:last-child){
+    margin-bottom: 10px;
+}
+.footer-col ul li a{
+    font-size: 16px;
+    text-transform: capitalize;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+    color: #ffffff;
+    padding-left: 8px;
+}
+.footer-col .social-links a{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255,255,255,0.2);
+    margin:0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+    color: #24262b;
+    background-color: #ffffff;
+}
+
+/*responsive footer*/
+@media(max-width: 767px){
+    .footer-col{
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+@media(max-width: 574px){
+    .footer-col{
+        width: 100%;
+    }
+}
+
+/*Add post button color correction
+*/
+.add-post{
+    background-color: var(--secondary-color);
+    color: aliceblue;
+    box-shadow: var(--cards-shadow) var(--bx-shd);
+}
+.add-post:hover{
+    background-color:var(--secondary-hover);
+    color: #f3f8ff;
+}
+
+
+h1{
+    color: aliceblue;
+    border-bottom:2px solid var(--secondary-color) ;
+    display: inline;
+}
+
+h1:before{
+    content: '';
+    position: relative;
+    left:0;
+    bottom: 1px;
+    background-color: var(--secondary-color);
+    height: 2px;
+    box-sizing: border-box;
+    width: 210px;
+}
+
+/*Back Button*/
+
+.btn-back{
+    background-color: var(--secondary-color);
+    color:aliceblue;
+    font-weight: bold;
+    box-shadow: var(--cards-shadow) var(--bx-shd);
+}
+
+.btn-back:hover{
+    background-color: var(--secondary-hover);
+    color: aliceblue;
+}
+
+.nav-link{
+    color: #b70101;
+}
+p{
+    margin-top: 0.5rem;
+    padding: 1rem;
+    color: aliceblue;
+    background-color: var(--txt-bg);
+    border-radius:7px;
+}
+
+input:focus{
+        outline: none !important;
+        border-color: var(--inp-focus);
+        box-shadow: 0 0 10px var(--inp-focus);
+}
