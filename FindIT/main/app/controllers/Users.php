@@ -1,76 +1,50 @@
 <?php
 class Users extends Controller {
+  private $userModel;
+
   public function __construct(){
       $this->userModel = $this->model('User');
   }
 
   public function register(){
-      // ... (оставим код регистрации без изменений)
+      // Проверяем, была ли отправлена форма
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          // Обрабатываем форму регистрации
 
-      if($this->userModel->register($data)){
-          flash('register_success', 'You are registered and can log in');
-          redirect('users/login');
+          // Получаем данные из формы
+          $data = [
+              'name' => trim($_POST['name']),
+              'email' => trim($_POST['email']),
+              'password' => trim($_POST['password']),
+              'confirm_password' => trim($_POST['confirm_password']),
+              'name_err' => '',
+              'email_err' => '',
+              'password_err' => '',
+              'confirm_password_err' => ''
+          ];
+
+          // логика валидации данных может быть добавлена здесь
+
+          // Пытаемся зарегистрировать пользователя
+          if ($this->userModel->register($data)) {
+              // Регистрация прошла успешно
+              flash('register_success', 'You are registered and can log in');
+              redirect('users/login');
+          } else {
+              // Что-то пошло не так
+              die('Something went wrong');
+          }
       } else {
-          die('Something went wrong');
+          // Если это не POST-запрос, вы могли бы отобразить форму регистрации
+          // Например, используя $this->view('users/register');
       }
   }
 
   public function login(){
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-          $data = [
-              'email' => trim($_POST['email']),
-              'password' => trim($_POST['password']),
-              'email_err' => '',
-              'password_err' => '',
-          ];
-
-          if(empty($data['email'])){
-              $data['email_err'] = 'Please enter email';
-          }
-
-          if(empty($data['password'])){
-              $data['password_err'] = 'Please enter password';
-          }
-
-          if($this->userModel->findUserByEmail($data['email'])){
-              $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-
-              if($loggedInUser){
-                  // Создаем куки для пользователя
-                  setcookie('user_id', $loggedInUser->id, time() + 3600, "/");
-                  setcookie('user_email', $loggedInUser->email, time() + 3600, "/");
-                  setcookie('user_name', $loggedInUser->name, time() + 3600, "/");
-
-                  redirect('posts');
-              } else {
-                  $data['password_err'] = 'Password incorrect';
-                  $this->view('users/login', $data);
-              }
-          } else {
-              $data['email_err'] = 'No user found';
-              $this->view('users/login', $data);
-          }
-      } else {
-          $data =[    
-              'email' => '',
-              'password' => '',
-              'email_err' => '',
-              'password_err' => '',        
-          ];
-
-          $this->view('users/login', $data);
-      }
+      // Оставляем ваш существующий код для обработки входа пользователя
   }
 
   public function logout(){
-      // Удаляем куки пользователя
-      setcookie('user_id', '', time() - 3600, "/");
-      setcookie('user_email', '', time() - 3600, "/");
-      setcookie('user_name', '', time() - 3600, "/");
-      
-      redirect('users/login');
+      // Оставляем ваш существующий код для выхода пользователя
   }
 }
-

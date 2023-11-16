@@ -1,0 +1,27 @@
+{% include 'inc/header.twig' %}
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <h1>Job Posts</h1>
+    </div>
+    <div class="col-md-6">
+      <a href="{{ URLROOT }}/posts/add" class="btn add-post pull-right">
+        <i class="fa fa-pencil"></i> Add Post
+      </a>
+    </div>
+  </div>
+  {% for post in data.posts %}
+    <div class="card card-body mb-3">
+        <div class="upper-bar">
+            <i class="fa fa-circle" style="color: #029402"></i>
+            <i class="fa fa-circle" style="color: #f1bf3f"></i>
+            <i class="fa fa-circle" style="color: #b70101"></i>
+        </div>
+      <h4 class="card-title">{{ post.title }}</h4>
+      <div class="p-2 mb-3">
+        Written by {{ post.name }} on {{ post.postCreated }}
+      </div>
+      <p class="card-text">{{ post.body }}</p>
+      <a href="{{ URLROOT }}/posts/show/{{ post.postId }}" class="btn btn-dark">More</a>
+    </div>
+  {% endfor %}
+{% include 'inc/footer.twig' %}

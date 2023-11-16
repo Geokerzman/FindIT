@@ -27,4 +27,4 @@
     }
   }
 
-  echo $twig->render('view.twig', ['variable' => $value]);
+  

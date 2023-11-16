@@ -1,0 +1,40 @@
+{# login.twig #}
+{% include 'inc/header.twig' %}
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="card m-5">
+      <div class="card-body">
+        <div class="upper-bar">
+          <i class="fa fa-circle" style="color: #029402"></i>
+          <i class="fa fa-circle" style="color: #f1bf3f"></i>
+          <i class="fa fa-circle" style="color: #b70101"></i>
+        </div>
+        <h2 class="card-title">Login</h2>
+        <p class="card-text">Please fill in your credentials to log in</p>
+        <form action="{{ URLROOT }}/users/login" method="post">
+          <div class="form-group">
+            <label for="email">Email: <sup>*</sup></label>
+            <input type="email" name="email" class="form-control {{ data.email_err ? 'is-invalid' : '' }}" value="{{ data.email }}">
+            <div class="invalid-feedback">{{ data.email_err }}</div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password: <sup>*</sup></label>
+            <input type="password" name="password" class="form-control {{ data.password_err ? 'is-invalid' : '' }}" value="{{ data.password }}">
+            <div class="invalid-feedback">{{ data.password_err }}</div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="submit" value="Login" class="btn btn-success btn-block">
+            </div>
+            <div class="col">
+              <a href="{{ URLROOT }}/users/register" class="btn btn-dark btn-block">No account? Register</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'inc/footer.twig' %}
